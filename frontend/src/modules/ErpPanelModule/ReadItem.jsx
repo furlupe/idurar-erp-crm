@@ -165,7 +165,7 @@ export default function ReadItem({ config, selectedItem }) {
             key={`${uniqueId()}`}
             loading={mailInProgress}
             onClick={() => {
-              send(currentErp._id);
+              send(currentErp._id, client._id);
             }}
             icon={<MailOutlined />}
           >
