@@ -14,6 +14,8 @@ const adminAuth = require('./controllers/coreControllers/adminAuth');
 const errorHandlers = require('./handlers/errorHandlers');
 const erpApiRouter = require('./routes/appRoutes/appApi');
 
+const { register } = require('prom-client'); 
+
 const fileUpload = require('express-fileupload');
 // create our Express app
 const app = express();
@@ -41,6 +43,12 @@ app.use('/api', adminAuth.isValidAuthToken, coreApiRouter);
 app.use('/api', adminAuth.isValidAuthToken, erpApiRouter);
 app.use('/download', coreDownloadRouter);
 app.use('/public', corePublicRouter);
+
+app.get('/metrics', async (req, res) => {
+  const metrics = await register.metrics();
+
+  return res.status(200).send(metrics);
+});
 
 // If that above routes didnt work, we 404 them and forward to error handler
 app.use(errorHandlers.notFound);
