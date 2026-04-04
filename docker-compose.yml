@@ -1,0 +1,35 @@
+services:
+  backend:
+    image: crm-backend
+    ports:
+      - "8888:8888"
+    expose: 
+      - "8888"
+    restart: unless-stopped
+    depends_on: 
+      - db
+    environment:
+      DATABASE: "mongodb://db:27017"
+      PORT: 8888
+      MAIL_FROM: ""
+      SMTP_USER: ""
+      SMTP_PASSWORD: ""
+
+  frontend:
+    image: crm-frontend
+    ports:
+      - "3000:3000"
+    restart: unless-stopped
+    depends_on: 
+      - backend
+    environment:
+      PORT: 3000
+      VITE_BACKEND_SERVER: "http://localhost:8888/"
+      VITE_DEV_REMOTE: "remote"
+
+  db:
+    image: mongo
+    restart: unless-stopped
+    expose: 
+      - "27017"
+    command: --port 27017

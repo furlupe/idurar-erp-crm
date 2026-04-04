@@ -20,7 +20,8 @@ export default ({ mode }) => {
       },
     },
     server: {
-      port: 3000,
+      host: true,
+      port: process.env.PORT,
       proxy: {
         '/api': {
           target: proxy_url,
