@@ -54,4 +54,4 @@ mkdir -Force last-run \
     -Jport="8887"
 ```
 
-These commands can also be made into scripts for convenience. For the command above check out `send-invoice.ps1`.
+These commands can also be made into scripts for convenience (e.g. `send-invoice.ps1`).

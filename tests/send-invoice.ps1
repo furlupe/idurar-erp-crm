@@ -9,7 +9,7 @@ docker run `
     -l "/host/last-run/results" `
     -e `
     -o "/host/last-run/report" `
-    -Jthreads_num="10" `
+    -Jthreads_num="100" `
     -Jramp_up_seconds="10" `
     -Jloops="10" `
     -Jhost="host.docker.internal" `
