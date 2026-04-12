@@ -1,0 +1,14 @@
+services:
+  frontend:
+    image: crm-frontend
+    build:
+      dockerfile: Dockerfile
+    ports:
+      - '3000:3000'
+    restart: unless-stopped
+    depends_on:
+      - backend
+    environment:
+      PORT: 3000
+      VITE_BACKEND_SERVER: 'http://localhost:8888/'
+      VITE_DEV_REMOTE: 'remote'
