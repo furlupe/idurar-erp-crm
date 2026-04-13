@@ -27,6 +27,15 @@ services:
       VITE_BACKEND_SERVER: "http://localhost:8888/"
       VITE_DEV_REMOTE: "remote"
 
+  prometheus:
+    image: prom/prometheus
+    restart: unless-stopped
+    ports:
+      - "9090:9090"
+    volumes:
+      - ./prometheus/config.yml:/etc/prometheus/prometheus.yml
+      - ./prometheus/data:/prometheus
+
   db:
     image: mongo
     restart: unless-stopped

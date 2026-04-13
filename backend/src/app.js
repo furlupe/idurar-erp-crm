@@ -47,7 +47,8 @@ app.use('/public', corePublicRouter);
 app.get('/metrics', async (req, res) => {
   const metrics = await register.metrics();
 
-  return res.status(200).send(metrics);
+  res.set('Content-Type', register.contentType);
+  return res.send(metrics);
 });
 
 // If that above routes didnt work, we 404 them and forward to error handler
