@@ -46,10 +46,15 @@
             <stringProp name="Argument.value">http</stringProp>
             <stringProp name="Argument.metadata">=</stringProp>
           </elementProp>
+          <elementProp name="DURATION" elementType="Argument">
+            <stringProp name="Argument.name">DURATION</stringProp>
+            <stringProp name="Argument.value">1000</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
         </collectionProp>
       </Arguments>
       <hashTree/>
-      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="Users">
+      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="Users" enabled="true">
         <stringProp name="ThreadGroup.num_threads">${__P(threads_num,${THREADS_NUM})}</stringProp>
         <stringProp name="ThreadGroup.ramp_time">${__P(ramp_up_seconds,${RAMP_UP_SECONDS})}</stringProp>
         <boolProp name="ThreadGroup.same_user_on_next_iteration">false</boolProp>
@@ -97,7 +102,7 @@
           <stringProp name="filename"></stringProp>
         </ResultCollector>
         <hashTree/>
-        <ResultCollector guiclass="ViewResultsFullVisualizer" testclass="ResultCollector" testname="Results">
+        <ResultCollector guiclass="ViewResultsFullVisualizer" testclass="ResultCollector" testname="Results" enabled="false">
           <boolProp name="ResultCollector.error_logging">false</boolProp>
           <objProp>
             <name>saveConfig</name>
@@ -134,7 +139,7 @@
           <stringProp name="filename">C:\Users\Dmitrii\source\repos\idurar-erp-crm\tests\last-run-file</stringProp>
         </ResultCollector>
         <hashTree/>
-        <ConfigTestElement guiclass="HttpDefaultsGui" testclass="ConfigTestElement" testname="HTTP Request Defaults">
+        <ConfigTestElement guiclass="HttpDefaultsGui" testclass="ConfigTestElement" testname="HTTP Request Defaults" enabled="true">
           <boolProp name="HTTPSampler.image_parser">true</boolProp>
           <boolProp name="HTTPSampler.concurrentDwn">true</boolProp>
           <intProp name="HTTPSampler.concurrentPool">6</intProp>
@@ -147,7 +152,7 @@
           <stringProp name="HTTPSampler.implementation"></stringProp>
         </ConfigTestElement>
         <hashTree/>
-        <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header manager">
+        <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header manager" enabled="true">
           <collectionProp name="HeaderManager.headers">
             <elementProp name="Content-Type" elementType="Header">
               <stringProp name="Header.name">Content-Type</stringProp>
@@ -160,16 +165,16 @@
           </collectionProp>
         </HeaderManager>
         <hashTree/>
-        <DurationAssertion guiclass="DurationAssertionGui" testclass="DurationAssertion" testname="Duration Check">
-          <stringProp name="DurationAssertion.duration">1000</stringProp>
+        <DurationAssertion guiclass="DurationAssertionGui" testclass="DurationAssertion" testname="Duration Check" enabled="true">
+          <stringProp name="DurationAssertion.duration">${__P(duration,${DURATION})}</stringProp>
         </DurationAssertion>
         <hashTree/>
-        <TransactionController guiclass="TransactionControllerGui" testclass="TransactionController" testname="Send invoice">
+        <TransactionController guiclass="TransactionControllerGui" testclass="TransactionController" testname="Send invoice" enabled="true">
           <boolProp name="TransactionController.parent">true</boolProp>
           <boolProp name="TransactionController.includeTimers">false</boolProp>
         </TransactionController>
         <hashTree>
-          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="api/login">
+          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="api/login" enabled="true">
             <stringProp name="HTTPSampler.path">api/login</stringProp>
             <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
             <stringProp name="HTTPSampler.method">POST</stringProp>
@@ -186,20 +191,20 @@
             </elementProp>
           </HTTPSamplerProxy>
           <hashTree>
-            <JSONPostProcessor guiclass="JSONPostProcessorGui" testclass="JSONPostProcessor" testname="Auth token extractor">
+            <JSONPostProcessor guiclass="JSONPostProcessorGui" testclass="JSONPostProcessor" testname="Auth token extractor" enabled="true">
               <stringProp name="JSONPostProcessor.referenceNames">AUTH_TOKEN</stringProp>
               <stringProp name="JSONPostProcessor.jsonPathExprs">$.result.token</stringProp>
               <stringProp name="JSONPostProcessor.match_numbers"></stringProp>
             </JSONPostProcessor>
             <hashTree/>
           </hashTree>
-          <IfController guiclass="IfControllerPanel" testclass="IfController" testname="If login succeeds">
+          <IfController guiclass="IfControllerPanel" testclass="IfController" testname="If login succeeds" enabled="true">
             <stringProp name="IfController.condition">${JMeterThread.last_sample_ok}</stringProp>
             <boolProp name="IfController.evaluateAll">false</boolProp>
             <boolProp name="IfController.useExpression">true</boolProp>
           </IfController>
           <hashTree>
-            <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="Auth Manager">
+            <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="Auth Manager" enabled="true">
               <collectionProp name="HeaderManager.headers">
                 <elementProp name="" elementType="Header">
                   <stringProp name="Header.name">Authorization</stringProp>
@@ -208,13 +213,13 @@
               </collectionProp>
             </HeaderManager>
             <hashTree/>
-            <IfController guiclass="IfControllerPanel" testclass="IfController" testname="Get dashboard">
+            <IfController guiclass="IfControllerPanel" testclass="IfController" testname="Get dashboard" enabled="true">
               <stringProp name="IfController.condition">${JMeterThread.last_sample_ok}</stringProp>
               <boolProp name="IfController.evaluateAll">false</boolProp>
               <boolProp name="IfController.useExpression">true</boolProp>
             </IfController>
             <hashTree>
-              <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="api/setting/listAll">
+              <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="api/setting/listAll" enabled="true">
                 <stringProp name="HTTPSampler.path">api/setting/listAll</stringProp>
                 <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
                 <stringProp name="HTTPSampler.method">GET</stringProp>
@@ -349,7 +354,7 @@
               </HTTPSamplerProxy>
               <hashTree/>
             </hashTree>
-            <IfController guiclass="IfControllerPanel" testclass="IfController" testname="Create client">
+            <IfController guiclass="IfControllerPanel" testclass="IfController" testname="Create client" enabled="true">
               <stringProp name="IfController.condition">${JMeterThread.last_sample_ok}</stringProp>
               <boolProp name="IfController.evaluateAll">false</boolProp>
               <boolProp name="IfController.useExpression">true</boolProp>
@@ -443,7 +448,7 @@
               </HTTPSamplerProxy>
               <hashTree/>
             </hashTree>
-            <IfController guiclass="IfControllerPanel" testclass="IfController" testname="Create invoice">
+            <IfController guiclass="IfControllerPanel" testclass="IfController" testname="Create invoice" enabled="true">
               <stringProp name="IfController.condition">${JMeterThread.last_sample_ok}</stringProp>
               <boolProp name="IfController.evaluateAll">false</boolProp>
               <boolProp name="IfController.useExpression">true</boolProp>
@@ -559,7 +564,7 @@
               </HTTPSamplerProxy>
               <hashTree/>
             </hashTree>
-            <IfController guiclass="IfControllerPanel" testclass="IfController" testname="Send email">
+            <IfController guiclass="IfControllerPanel" testclass="IfController" testname="Send email" enabled="true">
               <stringProp name="IfController.condition">${JMeterThread.last_sample_ok}</stringProp>
               <boolProp name="IfController.evaluateAll">false</boolProp>
               <boolProp name="IfController.useExpression">true</boolProp>

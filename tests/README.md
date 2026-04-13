@@ -38,7 +38,9 @@ This example will run the `send-invoice` test plan. It will send one request per
 
 ```bash
 mkdir -Force last-run \
-&& docker run \
+&& docker run
+    --rm \
+    --name "jmeter-test" \
     -v "./:/host" \
     --network "host" \
     jmeter-test \
